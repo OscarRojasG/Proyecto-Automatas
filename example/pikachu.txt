@@ -1,0 +1,7 @@
+empezar combate
+
+pikachu dice "hola"
+squirtle es nivel 10
+charmander es nivel 1,8
+
+combate finalizado
