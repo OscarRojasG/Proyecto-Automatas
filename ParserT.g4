@@ -3,29 +3,34 @@ import LexerT;
 
 program : cons BEGIN statement* END;
           
-statement : operacion | ciclo | si | leer | imprimir| declarar;
+statement : (operacion | ciclo | si | leer | imprimir | declarar);
 
 // Constantes
 cons: declarar*;
+ctes: PICHU;
 
 // Tipos de variables
-declarar: cadena | entero | flotante;
+declarar: cadena | entero | flotante | declarar_operacion;
 cadena: VARNAME 'dice' CHAR;
 entero: VARNAME 'es nivel' INT;
-flotante:VARNAME 'es nivel' FLOAT;
+flotante: VARNAME 'es nivel' (FLOAT | ctes);
+declarar_operacion: VARNAME 'es igual a' operacion;
 
 // Entrada / Salida
-imprimir: OUTPUT (VARNAME | CHAR)+;
+imprimir: OUTPUT (VARNAME | CHAR | INT | FLOAT | operacion)+;
 leer: INPUT declarar;
 
 //Operaciones matemáticas
-operacion: suma | multiplicacion | resta | pow | cos | sin;
-suma: VARNAME SUMAR VARNAME;
-multiplicacion: VARNAME MULT VARNAME;
-resta: VARNAME RESTAR VARNAME;
-division: VARNAME DIV VARNAME;
+operacion: (suma | multiplicacion | resta | pow | cos | sin)+;
+operable: (VARNAME | ctes | INT | FLOAT);
 
-pow: VARNAME POW INT;
+suma: operable (SUMAR operable)+;
+multiplicacion: operable (MULT operable)+;
+resta: operable (RESTAR operable)+;
+division: operable (DIV operable)+;
+
+
+pow: VARNAME POW (INT | operacion | VARNAME);
 cos: COSENO VARNAME;
 sin: SENO VARNAME;
 
@@ -41,7 +46,7 @@ si: IF condicional '{' statement+ '}';
 condicional: comparacion ((OR | AND) comparacion)*;
 
 comparacion: mayor | menor | igual | distinto;
-mayor: VARNAME MAYOR VARNAME;
-menor: VARNAME MENOR VARNAME;
-igual: VARNAME IGUAL VARNAME;
-distinto: VARNAME DISTINTO VARNAME;
+mayor: operable MAYOR operable;
+menor: operable MENOR operable;
+igual: operable IGUAL operable;
+distinto: operable DISTINTO operable;

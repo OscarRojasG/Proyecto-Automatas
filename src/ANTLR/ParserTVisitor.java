@@ -30,6 +30,12 @@ public interface ParserTVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCons(ParserTParser.ConsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ParserTParser#ctes}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCtes(ParserTParser.CtesContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ParserTParser#declarar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -54,6 +60,12 @@ public interface ParserTVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFlotante(ParserTParser.FlotanteContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ParserTParser#declarar_operacion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclarar_operacion(ParserTParser.Declarar_operacionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ParserTParser#imprimir}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -71,6 +83,12 @@ public interface ParserTVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOperacion(ParserTParser.OperacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserTParser#operable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperable(ParserTParser.OperableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserTParser#suma}.
 	 * @param ctx the parse tree
