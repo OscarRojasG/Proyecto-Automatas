@@ -15,6 +15,7 @@ cadena: VARNAME 'dice' CHAR;
 entero: VARNAME 'es nivel' INT;
 flotante: VARNAME 'es nivel' (FLOAT | ctes);
 declarar_operacion: VARNAME 'es igual a' operacion;
+
 // Entrada / Salida
 imprimir: OUTPUT (VARNAME | CHAR | INT | FLOAT | expresion)+;
 leer: INPUT declarar;
@@ -30,9 +31,9 @@ multiplicacion: MULT;
 resta: RESTAR;
 division: DIV;
 
-pow: VARNAME POW (INT | FLOAT | VARNAME);
-cos: COSENO VARNAME;
-sin: SENO VARNAME;
+pow: (INT | FLOAT | VARNAME) POW (INT | FLOAT | VARNAME);
+cos: COSENO (INT | FLOAT | VARNAME);
+sin: SENO (INT | FLOAT | VARNAME);
 
 // Ciclos
 ciclo: mientras | mientrasque;

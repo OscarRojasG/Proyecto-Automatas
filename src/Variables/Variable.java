@@ -1,5 +1,7 @@
 package Variables;
 
+import Util.Util;
+
 public class Variable {
     private String nombre;
     private String valor;
@@ -34,6 +36,6 @@ public class Variable {
         if (tipo == Tipo.STRING)
             return 0;
 
-        return Float.parseFloat(valor);
+        return Util.parseFloat(valor);
     }
 }

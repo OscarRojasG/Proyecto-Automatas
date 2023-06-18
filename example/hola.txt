@@ -1,0 +1,14 @@
+empezar combate
+
+pikachu es nivel 4
+charizard es nivel 2,5
+charmander dice "hola mundo" 
+
+yo te elijo pikachu
+yo te elijo charizard
+yo te elijo charmander
+yo te elijo "autómatas y compiladores"
+yo te elijo pikachu charizard charmander "automatas y compiladores"
+yo te elijo cosmog hola 
+
+combate finalizado

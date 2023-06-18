@@ -1,14 +1,10 @@
 empezar combate
 
-pikachu es nivel 4
-charizard es nivel 2,5
-charmander dice "hola mundo" 
+pikachu es nivel 3 
+charmander es nivel 2,5
 
-yo te elijo pikachu
-yo te elijo charizard
-yo te elijo charmander
-yo te elijo "autómatas y compiladores"
-yo te elijo pikachu charizard charmander "automatas y compiladores"
-yo te elijo pikachu junto con 2 es atacado por charizard
+yo te elijo pikachu es atacado por cosmog pikachu debilita sentret charmander junto con sentret charmander
+yo te elijo charmander potencia 3 es atacado por pikachu potencia 2 junto con cosmog charmander
+yo te elijo 6 es atacado por 2 junto con 3 debilita sentret 1,6 junto con 16 potencia 0,5
 
 combate finalizado

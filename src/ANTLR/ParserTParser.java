@@ -984,6 +984,8 @@ public class ParserTParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case VARNAME:
+			case INT:
+			case FLOAT:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(149);
@@ -1156,13 +1158,19 @@ public class ParserTParser extends Parser {
 	}
 
 	public static class PowContext extends ParserRuleContext {
+		public TerminalNode POW() { return getToken(ParserTParser.POW, 0); }
+		public List<TerminalNode> INT() { return getTokens(ParserTParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(ParserTParser.INT, i);
+		}
+		public List<TerminalNode> FLOAT() { return getTokens(ParserTParser.FLOAT); }
+		public TerminalNode FLOAT(int i) {
+			return getToken(ParserTParser.FLOAT, i);
+		}
 		public List<TerminalNode> VARNAME() { return getTokens(ParserTParser.VARNAME); }
 		public TerminalNode VARNAME(int i) {
 			return getToken(ParserTParser.VARNAME, i);
 		}
-		public TerminalNode POW() { return getToken(ParserTParser.POW, 0); }
-		public TerminalNode INT() { return getToken(ParserTParser.INT, 0); }
-		public TerminalNode FLOAT() { return getToken(ParserTParser.FLOAT, 0); }
 		public PowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1182,7 +1190,15 @@ public class ParserTParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(162);
-			match(VARNAME);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << VARNAME) | (1L << INT) | (1L << FLOAT))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			setState(163);
 			match(POW);
 			setState(164);
@@ -1210,6 +1226,8 @@ public class ParserTParser extends Parser {
 
 	public static class CosContext extends ParserRuleContext {
 		public TerminalNode COSENO() { return getToken(ParserTParser.COSENO, 0); }
+		public TerminalNode INT() { return getToken(ParserTParser.INT, 0); }
+		public TerminalNode FLOAT() { return getToken(ParserTParser.FLOAT, 0); }
 		public TerminalNode VARNAME() { return getToken(ParserTParser.VARNAME, 0); }
 		public CosContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1225,13 +1243,22 @@ public class ParserTParser extends Parser {
 	public final CosContext cos() throws RecognitionException {
 		CosContext _localctx = new CosContext(_ctx, getState());
 		enterRule(_localctx, 40, RULE_cos);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(166);
 			match(COSENO);
 			setState(167);
-			match(VARNAME);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << VARNAME) | (1L << INT) | (1L << FLOAT))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1247,6 +1274,8 @@ public class ParserTParser extends Parser {
 
 	public static class SinContext extends ParserRuleContext {
 		public TerminalNode SENO() { return getToken(ParserTParser.SENO, 0); }
+		public TerminalNode INT() { return getToken(ParserTParser.INT, 0); }
+		public TerminalNode FLOAT() { return getToken(ParserTParser.FLOAT, 0); }
 		public TerminalNode VARNAME() { return getToken(ParserTParser.VARNAME, 0); }
 		public SinContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1262,13 +1291,22 @@ public class ParserTParser extends Parser {
 	public final SinContext sin() throws RecognitionException {
 		SinContext _localctx = new SinContext(_ctx, getState());
 		enterRule(_localctx, 42, RULE_sin);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(169);
 			match(SENO);
 			setState(170);
-			match(VARNAME);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << VARNAME) | (1L << INT) | (1L << FLOAT))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1902,11 +1940,11 @@ public class ParserTParser extends Parser {
 		"\5,\27\2\u009a\u0097\3\2\2\2\u009a\u0098\3\2\2\2\u009a\u0099\3\2\2\2\u009b"+
 		"\37\3\2\2\2\u009c\u009d\7\23\2\2\u009d!\3\2\2\2\u009e\u009f\7\25\2\2\u009f"+
 		"#\3\2\2\2\u00a0\u00a1\7\24\2\2\u00a1%\3\2\2\2\u00a2\u00a3\7\26\2\2\u00a3"+
-		"\'\3\2\2\2\u00a4\u00a5\7!\2\2\u00a5\u00a6\7\27\2\2\u00a6\u00a7\t\2\2\2"+
-		"\u00a7)\3\2\2\2\u00a8\u00a9\7\21\2\2\u00a9\u00aa\7!\2\2\u00aa+\3\2\2\2"+
-		"\u00ab\u00ac\7\22\2\2\u00ac\u00ad\7!\2\2\u00ad-\3\2\2\2\u00ae\u00b1\5"+
-		"\60\31\2\u00af\u00b1\5\62\32\2\u00b0\u00ae\3\2\2\2\u00b0\u00af\3\2\2\2"+
-		"\u00b1/\3\2\2\2\u00b2\u00b3\7\17\2\2\u00b3\u00b4\5\66\34\2\u00b4\u00b6"+
+		"\'\3\2\2\2\u00a4\u00a5\t\2\2\2\u00a5\u00a6\7\27\2\2\u00a6\u00a7\t\2\2"+
+		"\2\u00a7)\3\2\2\2\u00a8\u00a9\7\21\2\2\u00a9\u00aa\t\2\2\2\u00aa+\3\2"+
+		"\2\2\u00ab\u00ac\7\22\2\2\u00ac\u00ad\t\2\2\2\u00ad-\3\2\2\2\u00ae\u00b1"+
+		"\5\60\31\2\u00af\u00b1\5\62\32\2\u00b0\u00ae\3\2\2\2\u00b0\u00af\3\2\2"+
+		"\2\u00b1/\3\2\2\2\u00b2\u00b3\7\17\2\2\u00b3\u00b4\5\66\34\2\u00b4\u00b6"+
 		"\7\6\2\2\u00b5\u00b7\5\4\3\2\u00b6\u00b5\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8"+
 		"\u00b6\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\u00ba\3\2\2\2\u00ba\u00bb\7\7"+
 		"\2\2\u00bb\61\3\2\2\2\u00bc\u00bd\7\16\2\2\u00bd\u00bf\7\6\2\2\u00be\u00c0"+
