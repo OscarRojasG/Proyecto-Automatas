@@ -5,19 +5,19 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.print.DocFlavor.STRING;
+
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import ANTLR.ParserTBaseVisitor;
 import ANTLR.ParserTLexer;
 import ANTLR.ParserTParser;
-import Variables.Var;
-import Variables.VarEntero;
-import Variables.VarFlotante;
-import Variables.VarString;
+import Variables.Tipo;
+import Variables.Variable;
 
 public class MyVisitor extends ParserTBaseVisitor<Integer> {
-	private HashMap<String, Var> mapaVariables = new HashMap<String, Var>();
+	private HashMap<String, Variable> mapaVariables = new HashMap<String, Variable>();
 
 	public String tokenName(Object nodo) {
 		if (nodo instanceof TerminalNode) {
@@ -38,8 +38,8 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		valor = valor.substring(1, valor.length() - 1);
 
 		// Crear variable e insertarla en el mapa
-		VarString varString = new VarString(nombre, valor);
-		mapaVariables.put(nombre, varString);
+		Variable variable = new Variable(nombre, valor, Tipo.STRING);
+		mapaVariables.put(nombre, variable);
 
 		return visitChildren(ctx);
 	}
@@ -47,11 +47,11 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 	@Override
 	public Integer visitEntero(ParserTParser.EnteroContext ctx) {
 		String nombre = ctx.getChild(0).getText();
-		int valor = Integer.parseInt(ctx.getChild(2).getText());
+		String valor = ctx.getChild(2).getText();
 
 		// Crear variable e insertarla en el mapa
-		VarEntero varEntero = new VarEntero(nombre, valor);
-		mapaVariables.put(nombre, varEntero);
+		Variable variable = new Variable(nombre, valor, Tipo.ENTERO);
+		mapaVariables.put(nombre, variable);
 
 		return visitChildren(ctx);
 	}
@@ -59,22 +59,10 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 	@Override
 	public Integer visitFlotante(ParserTParser.FlotanteContext ctx) {
 		String nombre = ctx.getChild(0).getText();
-		String strVal = ctx.getChild(2).getText();
+		String valor = ctx.getChild(2).getText();
 
-		// Convertir string a float
-		NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
-		float valor = 0;
-
-		try {
-			Number number = format.parse(strVal);
-			valor = number.floatValue();
-		} catch(ParseException e) {
-			e.printStackTrace();
-		}
-
-		// Crear variable e insertarla en el mapa
-		VarFlotante varFlotante = new VarFlotante(nombre, valor);
-		mapaVariables.put(nombre, varFlotante);
+		Variable variable = new Variable(nombre, valor, Tipo.FLOTANTE);
+		mapaVariables.put(nombre, variable);
 
 		return visitChildren(ctx);
 	}
@@ -87,14 +75,14 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 
 			// Token es una variable
 			if (tokenName.equals("VARNAME")) {
-				Var var = mapaVariables.get(text);
-				if (var == null) {
+				Variable variable = mapaVariables.get(text);
+				if (variable == null) {
 					System.out.print("null");
 					continue;
 				}
 
 				// Obtener valor de la variable como String
-				text = var.getString();
+				text = variable.getStrValue();
 			} 
 			// Token es un string literal
 			else {
