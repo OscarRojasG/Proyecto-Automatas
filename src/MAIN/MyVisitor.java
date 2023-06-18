@@ -56,7 +56,14 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 	@Override
 	public Integer visitFlotante(ParserTParser.FlotanteContext ctx) {
 		String nombre = ctx.getChild(0).getText();
-		String valor = ctx.getChild(2).getText();
+		ParseTree node = ctx.getChild(2);
+		String tokenName = tokenName(node);
+		String valor = null;
+
+		if (tokenName.equals("FLOAT")) 
+			valor = node.getText();
+		if (tokenName.equals("Expresion"))
+			valor = String.valueOf(calcularExpresion(node));
 
 		Variable variable = new Variable(nombre, valor, Tipo.FLOTANTE);
 		mapaVariables.put(nombre, variable);
@@ -114,12 +121,12 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 	}
 
 	private float calcularExpresion(ParseTree expTree) {
+		String sumaOResta = "Suma"; // Primer término o expresión siempre se suma
 		float resultado = 0;
 		int i = 0;
 
 		while (i < expTree.getChildCount()) {
 			float subresultado = 0;
-			String sumaOResta = "Suma"; // Primer término o expresión siempre se suma
 			String operacion = null;
 
 			// Recorrer todas las multiplicaciones y divisiones consecutivas
