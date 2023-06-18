@@ -78,17 +78,29 @@ public interface ParserTVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLeer(ParserTParser.LeerContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ParserTParser#expresion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpresion(ParserTParser.ExpresionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ParserTParser#operacion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitOperacion(ParserTParser.OperacionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserTParser#operable}.
+	 * Visit a parse tree produced by {@link ParserTParser#termino}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOperable(ParserTParser.OperableContext ctx);
+	T visitTermino(ParserTParser.TerminoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserTParser#funcion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncion(ParserTParser.FuncionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserTParser#suma}.
 	 * @param ctx the parse tree

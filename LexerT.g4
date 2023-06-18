@@ -11,14 +11,8 @@ DO: 'hacer';
 WHILE: 'mientras';
 FOR: 'para';
 
-VARNAME: [a-z]+;
-CHAR:  '"' (.)*? '"' ; 
-INT: '-'? [0-9]+;
-FLOAT: [0-9]+ ',' [0-9]+;
-
 COSENO: 'cosmog';
 SENO: 'sentret';
-
 
 SUMAR: 'es curado por';
 RESTAR: 'es atacado por';
@@ -38,5 +32,9 @@ PICHU: 'PICHU';
 MEW: 'inf';
 MEWTWO: '-inf';
 
-NUMBER : [0-9]+ ;
+VARNAME: [a-z]+;
+CHAR:  '"' (.)*? '"' ; 
+INT: '-'? [0-9]+;
+FLOAT: [0-9]+ ',' [0-9]+;
+
 WS : [ \t\r\n]+ -> skip ;

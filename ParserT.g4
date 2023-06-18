@@ -15,22 +15,22 @@ cadena: VARNAME 'dice' CHAR;
 entero: VARNAME 'es nivel' INT;
 flotante: VARNAME 'es nivel' (FLOAT | ctes);
 declarar_operacion: VARNAME 'es igual a' operacion;
-
 // Entrada / Salida
-imprimir: OUTPUT (VARNAME | CHAR | INT | FLOAT | operacion)+;
+imprimir: OUTPUT (VARNAME | CHAR | INT | FLOAT | expresion)+;
 leer: INPUT declarar;
 
 //Operaciones matemáticas
-operacion: (suma | multiplicacion | resta | pow | cos | sin)+;
-operable: (VARNAME | ctes | INT | FLOAT);
+expresion: termino (operacion termino)*;
+operacion: suma | resta | multiplicacion | division;
+termino: funcion | VARNAME | ctes | INT | FLOAT;
+funcion: pow | cos | sin;
 
-suma: operable (SUMAR operable)+;
-multiplicacion: operable (MULT operable)+;
-resta: operable (RESTAR operable)+;
-division: operable (DIV operable)+;
+suma: SUMAR;
+multiplicacion: MULT;
+resta: RESTAR;
+division: DIV;
 
-
-pow: VARNAME POW (INT | operacion | VARNAME);
+pow: VARNAME POW (INT | FLOAT | VARNAME);
 cos: COSENO VARNAME;
 sin: SENO VARNAME;
 
@@ -46,7 +46,7 @@ si: IF condicional '{' statement+ '}';
 condicional: comparacion ((OR | AND) comparacion)*;
 
 comparacion: mayor | menor | igual | distinto;
-mayor: operable MAYOR operable;
-menor: operable MENOR operable;
-igual: operable IGUAL operable;
-distinto: operable DISTINTO operable;
+mayor: expresion MAYOR expresion;
+menor: expresion MENOR expresion;
+igual: expresion IGUAL expresion;
+distinto: expresion DISTINTO expresion;
