@@ -75,8 +75,7 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 				Variable variable = mapaVariables.get(text);
 				if (variable == null) {
 					text = "null";
-				}
-				else {
+				} else {
 					text = variable.getStrValue();
 				}
 			}
@@ -92,9 +91,24 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 			// Imprimir token
 			System.out.print(text);
 
-			if (i < ctx.getChildCount() - 1) System.out.print(" ");
-			else System.out.print("\n");
+			if (i < ctx.getChildCount() - 1)
+				System.out.print(" ");
+			else
+				System.out.print("\n");
 		}
+
+		return visitChildren(ctx);
+	}
+
+	@Override
+	public Integer visitAsignacion(ParserTParser.AsignacionContext ctx) {
+		String nombre = ctx.getChild(0).getText();
+		Variable variable = mapaVariables.get(nombre);
+		if (variable == null || variable.getTipo() == Tipo.STRING)
+			return visitChildren(ctx);
+
+		float nuevoValor = calcularExpresion(ctx);
+		variable.setValor(nuevoValor);
 
 		return visitChildren(ctx);
 	}
@@ -103,39 +117,46 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		float resultado = 0;
 		int i = 0;
 
-		while(i < expTree.getChildCount()) {
+		while (i < expTree.getChildCount()) {
 			float subresultado = 0;
 			String sumaOResta = "Suma"; // Primer término o expresión siempre se suma
 			String operacion = null;
 
 			// Recorrer todas las multiplicaciones y divisiones consecutivas
-			while(true) {
+			while (true) {
 				// Obtener Término
 				ParseTree node = expTree.getChild(i).getChild(0);
 				float value = obtenerValorTermino(node);
 
 				// Guardar variable inicial en subresultado
-				if (operacion == null) subresultado = value;
+				if (operacion == null)
+					subresultado = value;
 				else {
 					// Multiplicar o dividir términos siguientes
-					if (operacion.equals("Multiplicacion")) subresultado *= value;
-					if (operacion.equals("Division")) subresultado /= value;
+					if (operacion.equals("Multiplicacion"))
+						subresultado *= value;
+					if (operacion.equals("Division"))
+						subresultado /= value;
 				}
 
 				i++;
-				if (i == expTree.getChildCount()) break;
+				if (i == expTree.getChildCount())
+					break;
 
 				// Obtener y guardar operación
 				node = expTree.getChild(i).getChild(0);
 				operacion = tokenName(node);
 
-				if (operacion.equals("Suma") || operacion.equals("Resta")) break;
+				if (operacion.equals("Suma") || operacion.equals("Resta"))
+					break;
 				i++;
 			}
 
 			// Sumar o restar cantidad acumulada
-			if (sumaOResta.equals("Suma")) resultado += subresultado;
-			if (sumaOResta.equals("Resta")) resultado -= subresultado;
+			if (sumaOResta.equals("Suma"))
+				resultado += subresultado;
+			if (sumaOResta.equals("Resta"))
+				resultado -= subresultado;
 
 			sumaOResta = operacion;
 			i++;
@@ -171,8 +192,9 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		// Caso variable
 		if (tokenName.equals("VARNAME")) {
 			Variable variable = mapaVariables.get(node.getText());
-			if (variable == null || variable.getTipo() == Tipo.STRING) return 0;
-			return variable.getFloatValue();
+			if (variable == null || variable.getTipo() == Tipo.STRING)
+				return 0;
+			return variable.getNumericValue();
 		}
 
 		// Caso constante predefinida
@@ -191,17 +213,21 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 			node = node.getChild(0);
 			tokenName = tokenName(node);
 
-			if (tokenName.equals("Pow")) return calcularPotencia(node);
-			if (tokenName.equals("Sin")) return calcularSeno(node);
-			if (tokenName.equals("Cos")) return calcularCoseno(node);
+			if (tokenName.equals("Pow"))
+				return calcularPotencia(node);
+			if (tokenName.equals("Sin"))
+				return calcularSeno(node);
+			if (tokenName.equals("Cos"))
+				return calcularCoseno(node);
 		}
 
 		return 0;
 	}
 
 	private float obtenerValorConstante(String name) {
-		switch(name) {
-			case "Pi": return (float) Math.PI;
+		switch (name) {
+			case "Pi":
+				return (float) Math.PI;
 		}
 		return 0;
 	}

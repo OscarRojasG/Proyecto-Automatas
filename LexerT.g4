@@ -20,10 +20,10 @@ MULT: 'junto con';
 DIV: 'debilita';
 POW: 'potencia';
 
-MAYOR: ('es de' | 'tenga') 'mayor nivel que';
-MENOR: ('es de' | 'tenga') 'menor nivel que';
-IGUAL: ('es del' | 'tenga el') 'mismo nivel que';
-DISTINTO: ('es de' | 'tenga') 'distinto nivel que';
+MAYOR: ('es de' | 'tenga') ' mayor nivel que';
+MENOR: ('es de' | 'tenga') ' menor nivel que';
+IGUAL: ('es del' | 'tenga el') ' mismo nivel que';
+DISTINTO: ('es de' | 'tenga') ' distinto nivel que';
 OR: 'o';
 AND: 'y';
 

@@ -66,11 +66,17 @@ public interface ParserTVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFlotante(ParserTParser.FlotanteContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserTParser#declarar_operacion}.
+	 * Visit a parse tree produced by {@link ParserTParser#asignacion}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclarar_operacion(ParserTParser.Declarar_operacionContext ctx);
+	T visitAsignacion(ParserTParser.AsignacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserTParser#terminoVariable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerminoVariable(ParserTParser.TerminoVariableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserTParser#imprimir}.
 	 * @param ctx the parse tree

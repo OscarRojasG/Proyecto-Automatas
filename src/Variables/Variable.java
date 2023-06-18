@@ -9,8 +9,25 @@ public class Variable {
 
     public Variable(String nombre, String valor, Tipo tipo) {
         this.nombre = nombre;
-        this.valor = valor;
         this.tipo = tipo;
+
+        if (tipo == Tipo.ENTERO) {
+            int valorNum = Integer.parseInt(valor);
+            this.valor = String.valueOf(valorNum);
+        }
+        if (tipo == Tipo.FLOTANTE) {
+            float valorNum = Util.parseFloat(valor);
+            this.valor = String.valueOf(valorNum);
+        }
+        if (tipo == Tipo.STRING) this.valor = valor;
+    }
+
+    public void setValor(float valor) {
+        if (tipo == Tipo.ENTERO) {
+            int valorNum = (int) valor;
+            this.valor = String.valueOf(valorNum);
+        }
+        else this.valor = String.valueOf(valor);
     }
 
     public String getNombre() {
@@ -25,17 +42,10 @@ public class Variable {
         return valor;
     }
 
-    public int getIntValue() {
+    public float getNumericValue() {
         if (tipo == Tipo.STRING)
             return 0;
-
-        return Integer.parseInt(valor);
-    }
-
-    public float getFloatValue() {
-        if (tipo == Tipo.STRING)
-            return 0;
-
-        return Util.parseFloat(valor);
+            
+        return Float.parseFloat(valor);
     }
 }

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.Locale;
 
 public class Util {
+    // Convierte a float los números que usan coma como separador decimal
     public static float parseFloat(String value) {
         NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
         float floatValue = 0;
