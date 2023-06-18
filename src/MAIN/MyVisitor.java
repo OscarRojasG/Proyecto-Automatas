@@ -1,5 +1,8 @@
 package MAIN;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import org.antlr.v4.runtime.RuleContext;
@@ -125,7 +128,8 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		ParseTree condicion = ctx.getChild(1);
 		boolean resultado = evaluarCondicion(condicion);
 
-		if (resultado) return visitChildren(ctx);
+		if (resultado)
+			return visitChildren(ctx);
 		return 0;
 	}
 
@@ -134,7 +138,7 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		String operacion = null;
 		int i = 0;
 
-		while(true) {
+		while (true) {
 			boolean subresultado = true;
 
 			ParseTree comparacion = condicion.getChild(i).getChild(0);
@@ -145,7 +149,7 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 			float valorExp1 = calcularExpresion(exp1);
 			float valorExp2 = calcularExpresion(exp2);
 
-			switch(tipoComparacion) {
+			switch (tipoComparacion) {
 				case "Menor":
 					subresultado = valorExp1 < valorExp2;
 					break;
@@ -155,22 +159,78 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 				case "Mayor":
 					subresultado = valorExp1 > valorExp2;
 					break;
+				case "Distinto":
+					subresultado = valorExp1 != valorExp2;
+					break;
 			}
 
-			if (i == 0) resultado = subresultado;
+			if (i == 0)
+				resultado = subresultado;
 			else {
-				if (operacion.equals("AND")) resultado = resultado && subresultado;
-				if (operacion.equals("OR")) resultado = resultado || subresultado;
+				if (operacion.equals("AND"))
+					resultado = resultado && subresultado;
+				if (operacion.equals("OR"))
+					resultado = resultado || subresultado;
 			}
 
 			i++;
-			if (i == condicion.getChildCount()) break;
+			if (i == condicion.getChildCount())
+				break;
 
 			operacion = tokenName(condicion.getChild(i));
 			i++;
 		}
 
 		return resultado;
+	}
+
+	@Override
+	public Integer visitMientras(ParserTParser.MientrasContext ctx) {
+		ParseTree condicion = ctx.getChild(1);
+
+		while (evaluarCondicion(condicion)) {
+			visitChildren(ctx);
+		}
+
+		return 0;
+	}
+
+	@Override
+	public Integer visitMientrasque(ParserTParser.MientrasqueContext ctx) {
+		ParseTree condicion = ctx.getChild(ctx.getChildCount() - 1);
+
+		do {
+			visitChildren(ctx);
+		} while (evaluarCondicion(condicion));
+
+		return 0;
+	}
+
+	@Override
+	public Integer visitLeer(ParserTParser.LeerContext ctx) {
+		String nombre = ctx.getChild(1).getText();
+
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			String valor = bf.readLine();
+			Variable variable;
+
+			if (valor.matches("[0-9]")) {
+				variable = new Variable(nombre, valor, Tipo.ENTERO);
+			}
+			else if (valor.matches("[0-9,]+")) {
+				variable = new Variable(nombre, valor, Tipo.FLOTANTE);
+			}
+			else {
+				variable = new Variable(nombre, valor, Tipo.STRING);
+			}
+
+			mapaVariables.put(nombre, variable);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return visitChildren(ctx);
 	}
 
 	private float calcularExpresion(ParseTree expTree) {
@@ -200,7 +260,8 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 				}
 
 				i++;
-				if (i == expTree.getChildCount()) break;
+				if (i == expTree.getChildCount())
+					break;
 
 				// Obtener y guardar operación
 				node = expTree.getChild(i).getChild(0);

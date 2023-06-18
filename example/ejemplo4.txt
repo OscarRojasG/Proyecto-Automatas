@@ -1,38 +1,38 @@
 empezar combate
 
-pikachu es nivel 3
-ivysaur es nivel 4
-metapod es nivel 1
-venusaur es nivel 0
-squirtle es nivel 5
+pikachu es nivel 3;
+ivysaur es nivel 4;
+metapod es nivel 1;
+venusaur es nivel 0;
+squirtle es nivel 5;
 
 si pikachu es de menor nivel que ivysaur {
-    venusaur es curado por metapod
-    yo te elijo "condición 1"
+    venusaur es curado por metapod;
+    yo te elijo "condición 1";
 }
 
 si pikachu es de mayor nivel que ivysaur {
-    venusaur es curado por metapod
-    yo te elijo "condición 2"
+    venusaur es curado por metapod;
+    yo te elijo "condición 2";
 }
 
-si pikachu junto con ivysour es de menor nivel que pikachu junto con squirtle {
-    venusaur es curado por metapod
-    yo te elijo "condición 3"
+si pikachu junto con ivysaur es de menor nivel que pikachu junto con squirtle {
+    venusaur es curado por metapod;
+    yo te elijo "condición 3";
 }
 
 si pikachu potencia pikachu es del mismo nivel que 27 {
-    venusaur es curado por metapod
-    yo te elijo "condición 4"
+    venusaur es curado por metapod;
+    yo te elijo "condición 4";
 }
 
 si pikachu es de distinto nivel que ivysour {
     si pikachu es del mismo nivel que 3 {
-        venusaur es curado por metapod
-        yo te elijo "condición 5"
+        venusaur es curado por metapod;
+        yo te elijo "condición 5";
     }
 }
 
-yo te elijo venusaur
+yo te elijo venusaur;
 
 combate finalizado

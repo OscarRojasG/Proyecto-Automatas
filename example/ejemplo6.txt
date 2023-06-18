@@ -1,0 +1,13 @@
+empezar combate
+
+pikachu es nivel 5;
+charmander es nivel 1000,0;
+
+hacer {
+    pikachu es curado por 1;
+    charmander debilita 2;
+    yo te elijo "pikachu subió a nivel:" pikachu;
+    yo te elijo "charmander bajó a nivel:" charmander;
+} mientras pikachu tenga menor nivel que 10 o charmander tenga mayor nivel que 10
+
+combate finalizado

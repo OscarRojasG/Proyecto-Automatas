@@ -1,0 +1,12 @@
+empezar combate
+
+pikachu es nivel 0;
+metapod es nivel 1;
+charmander es nivel 10;
+
+mientras pikachu tenga menor nivel que charmander {
+	pikachu es curado por metapod;
+	yo te elijo "pikachu subió a nivel" pikachu;
+}
+
+combate finalizado

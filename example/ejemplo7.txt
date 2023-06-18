@@ -1,0 +1,11 @@
+empezar combate
+
+yo te elijo "Ingrese nivel";
+mote pikachu;
+
+pikachu es curado por pikachu;
+
+yo te elijo "Pikachu aumentó su nivel al doble";
+yo te elijo "Pikachu ahora es nivel" pikachu;
+
+combate finalizado

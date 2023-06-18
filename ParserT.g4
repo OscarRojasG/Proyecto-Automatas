@@ -3,7 +3,7 @@ import LexerT;
 
 program : constante* BEGIN statement* END;
           
-statement : (ciclo | si | leer | imprimir | declarar | asignacion);
+statement : (ciclo | si) | (leer | imprimir | declarar | asignacion);
 
 // Constantes
 constante: declarar;
@@ -11,18 +11,18 @@ valor_constante: pi;
 pi: PICHU;
 
 // Tipos de variables
-declarar: cadena | entero | flotante;
+declarar: (cadena | entero | flotante) ';';
 cadena: VARNAME 'dice' CHAR;
 entero: VARNAME 'es nivel' INT;
 flotante: VARNAME 'es nivel' (FLOAT | expresion);
 
 // Asignación
-asignacion: terminoVariable (operacion termino)*;
+asignacion: terminoVariable (operacion termino)* ';';
 terminoVariable: VARNAME;
 
 // Entrada / Salida
-imprimir: OUTPUT (VARNAME | CHAR | expresion)+;
-leer: INPUT declarar;
+imprimir: OUTPUT (VARNAME | CHAR | expresion)+ ';';
+leer: INPUT VARNAME ';';
 
 //Operaciones matemáticas
 expresion: termino (operacion termino)*;

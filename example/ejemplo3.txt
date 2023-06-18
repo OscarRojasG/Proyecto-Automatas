@@ -1,16 +1,16 @@
 empezar combate
 
-pikachu es nivel 8,6
-charmander es nivel sentret pikachu
-bulbasaur es nivel 10
-squirtle es nivel bulbasaur debilita pikachu
+pikachu es nivel 8,6;
+charmander es nivel sentret pikachu;
+bulbasaur es nivel 10;
+squirtle es nivel bulbasaur debilita pikachu;
 
-squirtle es atacado por cosmog PICHU
-squirtle es curado por bulbasaur
-pikachu junto con charmander
-pikachu es nivel pikachu potencia 2
+squirtle es atacado por cosmog PICHU;
+squirtle es curado por bulbasaur;
+pikachu junto con charmander;
+pikachu es nivel pikachu potencia 2;
 
-yo te elijo "Nivel Pikachu:" pikachu
-yo te elijo "Nivel Squirtle:" squirtle
+yo te elijo "Nivel Pikachu:" pikachu;
+yo te elijo "Nivel Squirtle:" squirtle;
 
 combate finalizado
