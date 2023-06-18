@@ -1,0 +1,31 @@
+pikachu es nivel 30;
+
+empezar combate
+
+squirtle es nivel 2;
+
+yo te elijo "Números primos de" squirtle "a" pikachu;
+
+mientras squirtle tenga menor nivel que pikachu o squirtle tenga el mismo nivel que pikachu {
+    snivy es nivel 1;
+    raichu es nivel 0;
+
+    mientras snivy tenga menor nivel que squirtle o snivy tenga el mismo nivel que squirtle {
+        charmander es nivel squirtle debilita snivy;
+        charmeleon es casi nivel squirtle debilita snivy;
+
+        si charmander es del mismo nivel que charmeleon {
+            raichu es curado por 1;
+        }
+
+        snivy es curado por 1;
+    }
+
+    si raichu es del mismo nivel que 2 {
+        yo te elijo squirtle;
+    }
+
+    squirtle es curado por 1;
+}
+
+combate finalizado

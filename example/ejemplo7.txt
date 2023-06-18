@@ -1,11 +1,20 @@
 empezar combate
 
-yo te elijo "Ingrese nivel";
+yo te elijo "Ingrese un número";
 mote pikachu;
+squirtle es nivel 1;
 
-pikachu es curado por pikachu;
+yo te elijo "Divisores de" pikachu;
 
-yo te elijo "Pikachu aumentó su nivel al doble";
-yo te elijo "Pikachu ahora es nivel" pikachu;
+mientras squirtle tenga menor nivel que pikachu o squirtle tenga el mismo nivel que pikachu {
+    charmander es nivel pikachu debilita squirtle;
+    charmeleon es casi nivel pikachu debilita squirtle;
+
+    si charmander es del mismo nivel que charmeleon {
+        yo te elijo squirtle;
+    }
+
+    squirtle es curado por 1;
+}
 
 combate finalizado

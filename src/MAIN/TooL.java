@@ -14,7 +14,7 @@ import ANTLR.ParserTParser;
 public class TooL {
 	
 	public static void main(String[] args) throws Exception {
-        ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo7.txt"));
+        ANTLRInputStream input = new ANTLRInputStream(new FileInputStream("example/ejemplo9.txt"));
 		ParserTLexer lexer = new ParserTLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ParserTParser parser = new ParserTParser(tokens);  

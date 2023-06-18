@@ -11,15 +11,11 @@ public class Variable {
         this.nombre = nombre;
         this.tipo = tipo;
 
-        if (tipo == Tipo.ENTERO) {
-            int valorNum = Integer.parseInt(valor);
-            this.valor = String.valueOf(valorNum);
-        }
-        if (tipo == Tipo.FLOTANTE) {
-            float valorNum = Util.parseFloat(valor);
-            this.valor = String.valueOf(valorNum);
-        }
         if (tipo == Tipo.STRING) this.valor = valor;
+        else {
+            float valorNum = Util.parseFloat(valor);
+            setValor(valorNum);
+        }
     }
 
     public void setValor(float valor) {

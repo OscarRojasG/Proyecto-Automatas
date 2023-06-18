@@ -1,0 +1,24 @@
+empezar combate
+
+yo te elijo "Ingrese un nivel negativo";
+hacer {
+    mote pikachu;
+
+    si pikachu es de mayor nivel que 0 o pikachu es del mismo nivel que 0 {
+        yo te elijo "Nivel debe ser negativo";
+    }    
+} mientras pikachu tenga mayor nivel que 0 o pikachu tenga el mismo nivel que 0
+
+yo te elijo "Ingrese otro nivel negativo";
+hacer {
+    mote charmander;
+
+    si charmander es de mayor nivel que 0 o charmander es del mismo nivel que 0 {
+        yo te elijo "Nivel debe ser negativo";
+    }
+} mientras charmander tenga mayor nivel que 0 o charmander tenga el mismo nivel que 0
+
+squirtle es casi nivel pikachu junto con charmander;
+yo te elijo pikachu "por" charmander "igual" squirtle;
+
+combate finalizado

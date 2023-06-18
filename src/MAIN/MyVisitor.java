@@ -47,9 +47,15 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 	@Override
 	public Integer visitEntero(ParserTParser.EnteroContext ctx) {
 		String nombre = ctx.getChild(0).getText();
-		String valor = ctx.getChild(2).getText();
+		ParseTree node = ctx.getChild(2);
+		String tokenName = tokenName(node);
+		String valor = null;
 
-		// Crear variable e insertarla en el mapa
+		if (tokenName.equals("INT"))
+			valor = node.getText();
+		if (tokenName.equals("Expresion"))
+			valor = String.valueOf(calcularExpresion(node));
+
 		Variable variable = new Variable(nombre, valor, Tipo.ENTERO);
 		mapaVariables.put(nombre, variable);
 
@@ -215,10 +221,10 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 			String valor = bf.readLine();
 			Variable variable;
 
-			if (valor.matches("[0-9]")) {
-				variable = new Variable(nombre, valor, Tipo.ENTERO);
+			if (valor.matches("-?[0-9]+")) {
+				variable = new Variable(nombre, valor, Tipo.ENTERO);;
 			}
-			else if (valor.matches("[0-9,]+")) {
+			else if (valor.matches("-?[0-9,]+")) {
 				variable = new Variable(nombre, valor, Tipo.FLOTANTE);
 			}
 			else {

@@ -1,13 +1,13 @@
 empezar combate
 
 pikachu es nivel 3;
-raichu es nivel 2,5;
+raichu es casi nivel 2,5;
 pikachu es curado por raichu;
 pikachu junto con raichu;
 yo te elijo pikachu;
 
-pikachu es nivel 3,0;
-raichu es nivel 2,5;
+pikachu es casi nivel 3,0;
+raichu es casi nivel 2,5;
 pikachu es curado por raichu;
 pikachu junto con raichu;
 yo te elijo pikachu;

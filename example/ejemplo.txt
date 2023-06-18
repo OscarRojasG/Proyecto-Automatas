@@ -1,7 +1,7 @@
 empezar combate
 
 pikachu es nivel 4;
-charizard es nivel 2,5;
+charizard es casi nivel 2,5;
 charmander dice "hola mundo"; 
 
 yo te elijo pikachu;
