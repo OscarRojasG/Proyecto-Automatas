@@ -1,29 +1,30 @@
 grammar ParserT;
 import LexerT;
 
-program : cons BEGIN statement* END;
+program : constante* BEGIN statement* END;
           
 statement : (operacion | ciclo | si | leer | imprimir | declarar);
 
 // Constantes
-cons: declarar*;
-ctes: PICHU;
+constante: declarar;
+valor_constante: pi;
+pi: PICHU;
 
 // Tipos de variables
 declarar: cadena | entero | flotante | declarar_operacion;
 cadena: VARNAME 'dice' CHAR;
 entero: VARNAME 'es nivel' INT;
-flotante: VARNAME 'es nivel' (FLOAT | ctes);
+flotante: VARNAME 'es nivel' (FLOAT | valor_constante);
 declarar_operacion: VARNAME 'es igual a' operacion;
 
 // Entrada / Salida
-imprimir: OUTPUT (VARNAME | CHAR | INT | FLOAT | expresion)+;
+imprimir: OUTPUT (VARNAME | CHAR | expresion)+;
 leer: INPUT declarar;
 
 //Operaciones matemáticas
 expresion: termino (operacion termino)*;
 operacion: suma | resta | multiplicacion | division;
-termino: funcion | VARNAME | ctes | INT | FLOAT;
+termino: funcion | VARNAME | INT | FLOAT | valor_constante;
 funcion: pow | cos | sin;
 
 suma: SUMAR;
@@ -31,9 +32,9 @@ multiplicacion: MULT;
 resta: RESTAR;
 division: DIV;
 
-pow: (INT | FLOAT | VARNAME) POW (INT | FLOAT | VARNAME);
-cos: COSENO (INT | FLOAT | VARNAME);
-sin: SENO (INT | FLOAT | VARNAME);
+pow: (INT | FLOAT | VARNAME | valor_constante) POW (INT | FLOAT | VARNAME | valor_constante);
+cos: COSENO (INT | FLOAT | VARNAME | valor_constante);
+sin: SENO (INT | FLOAT | VARNAME | valor_constante);
 
 // Ciclos
 ciclo: mientras | mientrasque;

@@ -32,14 +32,21 @@ public class ParserTBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCons(ParserTParser.ConsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitConstante(ParserTParser.ConstanteContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCtes(ParserTParser.CtesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValor_constante(ParserTParser.Valor_constanteContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitPi(ParserTParser.PiContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

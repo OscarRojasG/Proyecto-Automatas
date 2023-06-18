@@ -9,6 +9,6 @@ yo te elijo charizard
 yo te elijo charmander
 yo te elijo "autómatas y compiladores"
 yo te elijo pikachu charizard charmander "automatas y compiladores"
-yo te elijo cosmog hola 
+yo te elijo "resultado =" cosmog pikachu
 
 combate finalizado

@@ -112,35 +112,7 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 			while(true) {
 				// Obtener Término
 				ParseTree node = expTree.getChild(i).getChild(0);
-				String tokenName = tokenName(node);
-				float value = 0;
-
-				// Caso Variable
-				if (tokenName.equals("VARNAME")) {
-					String text = node.getText();
-					Variable variable = mapaVariables.get(text);
-
-					// Variable no existe o es de tipo STRING
-					if (variable == null || variable.getTipo() == Tipo.STRING) return 0;
-					
-					value = variable.getFloatValue();
-				}
-
-				// Caso entero o flotante literal
-				if (tokenName.equals("INT") || tokenName.equals("FLOAT")) {
-					String text = node.getText();
-					value = Float.parseFloat(text);
-				}
-
-				// Caso función
-				if (tokenName.equals("Funcion")) {
-					node = node.getChild(0);
-					tokenName = tokenName(node);
-
-					if (tokenName.equals("Pow")) value = calcularPotencia(node);
-					if (tokenName.equals("Sin")) value = calcularSeno(node);
-					if (tokenName.equals("Cos")) value = calcularCoseno(node);
-				}
+				float value = obtenerValorTermino(node);
 
 				// Guardar variable inicial en subresultado
 				if (operacion == null) subresultado = value;
@@ -175,51 +147,63 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 	private float calcularPotencia(ParseTree tree) {
 		ParseTree base = tree.getChild(0);
 		ParseTree exp = tree.getChild(2);
-		float valorBase, valorExp;
-
-		if (tokenName(base).equals("VARNAME")) {
-			Variable varBase = mapaVariables.get(base.getText());
-			if (varBase == null || varBase.getTipo() == Tipo.STRING) return 0;
-			valorBase = varBase.getFloatValue();
-		}
-		else valorBase = Util.parseFloat(base.getText());
-
-		if (tokenName(exp).equals("VARNAME")) {
-			Variable varExp = mapaVariables.get(exp.getText());
-			if (varExp == null || varExp.getTipo() == Tipo.STRING) return 0;
-			valorExp = varExp.getFloatValue();
-		}
-		else valorExp = Util.parseFloat(exp.getText());
+		float valorBase = obtenerValorTermino(base);
+		float valorExp = obtenerValorTermino(exp);
 
 		return (float) Math.pow(valorBase, valorExp);
 	}
 
 	private float calcularSeno(ParseTree tree) {
 		ParseTree node = tree.getChild(1);
-		float valor;
-
-		if (tokenName(node).equals("VARNAME")) {
-			Variable variable = mapaVariables.get(node.getText());
-			if (variable == null || variable.getTipo() == Tipo.STRING) return 0;
-			valor = variable.getFloatValue();
-		}
-		else valor = Util.parseFloat(node.getText());
-
+		float valor = obtenerValorTermino(node);
 		return (float) Math.sin(valor);
 	}
 
 	private float calcularCoseno(ParseTree tree) {
 		ParseTree node = tree.getChild(1);
-		float valor;
+		float valor = obtenerValorTermino(node);
+		return (float) Math.cos(valor);
+	}
 
-		if (tokenName(node).equals("VARNAME")) {
+	private float obtenerValorTermino(ParseTree node) {
+		String tokenName = tokenName(node);
+
+		// Caso variable
+		if (tokenName.equals("VARNAME")) {
 			Variable variable = mapaVariables.get(node.getText());
 			if (variable == null || variable.getTipo() == Tipo.STRING) return 0;
-			valor = variable.getFloatValue();
+			return variable.getFloatValue();
 		}
-		else valor = Util.parseFloat(node.getText());
 
-		return (float) Math.cos(valor);
+		// Caso constante predefinida
+		if (tokenName.equals("Valor_constante")) {
+			tokenName = tokenName(node.getChild(0));
+			return obtenerValorConstante(tokenName);
+		}
+
+		// Caso entero o flotante literal
+		if (tokenName.equals("INT") || tokenName(node).equals("FLOAT")) {
+			return Util.parseFloat(node.getText());
+		}
+
+		// Caso función
+		if (tokenName.equals("Funcion")) {
+			node = node.getChild(0);
+			tokenName = tokenName(node);
+
+			if (tokenName.equals("Pow")) return calcularPotencia(node);
+			if (tokenName.equals("Sin")) return calcularSeno(node);
+			if (tokenName.equals("Cos")) return calcularCoseno(node);
+		}
+
+		return 0;
+	}
+
+	private float obtenerValorConstante(String name) {
+		switch(name) {
+			case "Pi": return (float) Math.PI;
+		}
+		return 0;
 	}
 
 }

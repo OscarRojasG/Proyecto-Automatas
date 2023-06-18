@@ -24,17 +24,23 @@ public interface ParserTVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(ParserTParser.StatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserTParser#cons}.
+	 * Visit a parse tree produced by {@link ParserTParser#constante}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCons(ParserTParser.ConsContext ctx);
+	T visitConstante(ParserTParser.ConstanteContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserTParser#ctes}.
+	 * Visit a parse tree produced by {@link ParserTParser#valor_constante}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCtes(ParserTParser.CtesContext ctx);
+	T visitValor_constante(ParserTParser.Valor_constanteContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserTParser#pi}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPi(ParserTParser.PiContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserTParser#declarar}.
 	 * @param ctx the parse tree
