@@ -60,7 +60,7 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		String tokenName = tokenName(node);
 		String valor = null;
 
-		if (tokenName.equals("FLOAT")) 
+		if (tokenName.equals("FLOAT"))
 			valor = node.getText();
 		if (tokenName.equals("Expresion"))
 			valor = String.valueOf(calcularExpresion(node));
@@ -120,6 +120,59 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 		return visitChildren(ctx);
 	}
 
+	@Override
+	public Integer visitSi(ParserTParser.SiContext ctx) {
+		ParseTree condicion = ctx.getChild(1);
+		boolean resultado = evaluarCondicion(condicion);
+
+		if (resultado) return visitChildren(ctx);
+		return 0;
+	}
+
+	private boolean evaluarCondicion(ParseTree condicion) {
+		boolean resultado = true;
+		String operacion = null;
+		int i = 0;
+
+		while(true) {
+			boolean subresultado = true;
+
+			ParseTree comparacion = condicion.getChild(i).getChild(0);
+			String tipoComparacion = tokenName(comparacion);
+
+			ParseTree exp1 = comparacion.getChild(0);
+			ParseTree exp2 = comparacion.getChild(2);
+			float valorExp1 = calcularExpresion(exp1);
+			float valorExp2 = calcularExpresion(exp2);
+
+			switch(tipoComparacion) {
+				case "Menor":
+					subresultado = valorExp1 < valorExp2;
+					break;
+				case "Igual":
+					subresultado = valorExp1 == valorExp2;
+					break;
+				case "Mayor":
+					subresultado = valorExp1 > valorExp2;
+					break;
+			}
+
+			if (i == 0) resultado = subresultado;
+			else {
+				if (operacion.equals("AND")) resultado = resultado && subresultado;
+				if (operacion.equals("OR")) resultado = resultado || subresultado;
+			}
+
+			i++;
+			if (i == condicion.getChildCount()) break;
+
+			operacion = tokenName(condicion.getChild(i));
+			i++;
+		}
+
+		return resultado;
+	}
+
 	private float calcularExpresion(ParseTree expTree) {
 		String sumaOResta = "Suma"; // Primer término o expresión siempre se suma
 		float resultado = 0;
@@ -147,8 +200,7 @@ public class MyVisitor extends ParserTBaseVisitor<Integer> {
 				}
 
 				i++;
-				if (i == expTree.getChildCount())
-					break;
+				if (i == expTree.getChildCount()) break;
 
 				// Obtener y guardar operación
 				node = expTree.getChild(i).getChild(0);
